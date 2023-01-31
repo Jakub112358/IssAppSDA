@@ -3,6 +3,6 @@ module com.example.issappsda {
     requires javafx.fxml;
 
 
-    opens com.example.issappsda to javafx.fxml;
-    exports com.example.issappsda;
+    opens iss to javafx.fxml;
+    exports iss;
 }
