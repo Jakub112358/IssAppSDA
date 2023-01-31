@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class SceneManager {
     public Scene getHelloScene () throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("hello-view.fxml"));
-        return new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("first-view.fxml"));
+        return new Scene(fxmlLoader.load(), 600, 400);
     }
 
 }
