@@ -1,5 +1,6 @@
 package com.example.jsonDeserialization;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,33 +9,28 @@ import java.net.URL;
 
 public class JsonOperations {
     private final static String BASE_URL = "http://api.open-notify.org/iss-now.json";
+    private final static String PEOPLE_URL = "http://api.open-notify.org/astros.json";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
 
-        waitingMessage();
-        ISSLocation loc1 = getLocation();
-        ISSLocation loc2 = getLocation();
-        ISSLocation loc3 = getLocation();
-
-        System.out.println("1. " + loc1 + "\n2. " + loc2 + "\n3. " + loc3);
-    }
-
-    public static JsonNode jsonDeserialization(URL url) throws IOException {
+    private JsonNode jsonDeserialization1(URL url) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readTree(url);
     }
 
-    public static ISSLocation getLocation () throws IOException, InterruptedException {
-        JsonNode request = jsonDeserialization(new URL(BASE_URL));
-        Thread.sleep(5000);
+    public ISSLocation getLocation() throws IOException {
+        JsonNode request = jsonDeserialization1(new URL(BASE_URL));
+        System.out.println(request.toString());
         return new ISSLocation(request.get("timestamp").asInt(),
                 request.get("iss_position").get("latitude").asDouble(),
                 request.get("iss_position").get("longitude").asDouble());
     }
 
-    public static void waitingMessage () {
-        System.out.println("Carrying out measurements. Please wait...\n");
+    public Astronaut[] getAstronauts() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        JsonNode request = jsonDeserialization1(new URL(PEOPLE_URL));
+        String json = request.get("people").toString();
+        System.out.println(json);
+        return objectMapper.readValue(json, Astronaut[].class);
     }
-
-
 }

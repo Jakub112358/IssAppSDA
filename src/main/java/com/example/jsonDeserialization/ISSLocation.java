@@ -23,6 +23,7 @@ public class ISSLocation {
         return longitude;
     }
 
+
     @Override
     public String toString() {
         return "ISSLocation{" +
