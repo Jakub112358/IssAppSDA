@@ -1,8 +1,10 @@
 module com.example.issappsda {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.hibernate.orm.core;
+    requires java.sql;
 
 
-    opens com.example.issappsda to javafx.fxml;
-    exports com.example.issappsda;
+    opens iss to javafx.fxml;
+    exports iss;
 }
