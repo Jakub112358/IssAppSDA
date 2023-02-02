@@ -1,5 +1,7 @@
 package iss.DAO;
 
+import iss.model.ISSLocation;
+import iss.model.ISSVelocity;
 import iss.model.SpaceCrew;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -22,6 +24,8 @@ public class DBConnector {
     private void connect(){
          Configuration configuration = new Configuration();
          configuration.addAnnotatedClass(SpaceCrew.class);
+         configuration.addAnnotatedClass(ISSLocation.class);
+         configuration.addAnnotatedClass(ISSVelocity.class);
          configuration.configure("hibernate.cfg.xml");
          sessionFactory = configuration.buildSessionFactory();
      }

@@ -17,14 +17,11 @@ public class SpaceCrew {
 
     SpaceCrew() {
     }
+
 //removed id from constructor
     public SpaceCrew(String name, String craft) {
         this.name = name;
         this.craft = craft;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
@@ -33,18 +30,6 @@ public class SpaceCrew {
 
     public String getCraft() {
         return craft;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCraft(String craft) {
-        this.craft = craft;
     }
 
     @Override
