@@ -3,15 +3,18 @@ package iss.controller;
 import iss.model.ISSLocation;
 import iss.model.SpaceCrew;
 import iss.service.Service;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 
 
 public class Controller {
@@ -49,17 +52,25 @@ public class Controller {
     private Label nextPassLabel;
 
     @FXML
+    private ComboBox<SpaceCrew> boxAstronauts;
+
+    @FXML
     void onRefreshButton() {
         ISSLocation issLocation = service.getLocation();
         SpaceCrew[] spaceCrew = service.getSpaceCrew();
-
         Instant instant =  Instant.ofEpochSecond(issLocation.getTimestamp());
+
+        latLabel.setText(String.valueOf(issLocation.getLatitude()));
+        altLabel.setText(String.valueOf(issLocation.getLongitude()));
         timeLabel.setText(LocalTime.ofInstant(instant, ZoneOffset.UTC).toString());
 
         speedLabel.setText(service.getSpeed());
+
         peopleLabel.setText(String.valueOf(spaceCrew.length));
-        latLabel.setText(String.valueOf(issLocation.getLatitude()));
-        altLabel.setText(String.valueOf(issLocation.getLongitude()));
+
+        ObservableList<SpaceCrew> spaceCrewList = FXCollections.observableList(Arrays.asList(spaceCrew));
+        boxAstronauts.setItems(spaceCrewList);
+
     }
 
     @FXML
