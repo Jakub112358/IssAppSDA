@@ -34,10 +34,9 @@ public class SpaceCrew {
 
     @Override
     public String toString() {
-        return "SpaceCrew{" +
+        return
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", craft='" + craft + '\'' +
-                '}';
+                ", craft='" + craft + '\'';
     }
 }
