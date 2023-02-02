@@ -1,12 +1,14 @@
 package iss.service;
 
 import iss.model.ISSLocation;
+import iss.model.SpaceCrew;
 import iss.utils.JsonOperations;
 import java.util.Random;
 
 public class Service {
     private JsonOperations jsonOperations;
     private ISSLocation currentLocation;
+    private SpaceCrew[] spaceCrew;
 
     public Service() {
         jsonOperations = new JsonOperations();
@@ -28,9 +30,10 @@ public class Service {
         return String.valueOf(random.nextInt(1000, 2000));
     }
 
-    public String getPeople() {
-        Random random = new Random();
-        return String.valueOf(random.nextInt(10, 12));
+    public SpaceCrew[] getSpaceCrew() {
+        spaceCrew = jsonOperations.getSpaceCrew();
+        // here DB operation
+        return spaceCrew;
     }
 
 
