@@ -1,4 +1,4 @@
-package hibernate;
+package iss.model;
 
 import javax.persistence.*;
 
@@ -17,9 +17,8 @@ public class SpaceCrew {
 
     SpaceCrew() {
     }
-
-    public SpaceCrew(int id, String name, String craft) {
-        this.id = id;
+//removed id from constructor
+    public SpaceCrew(String name, String craft) {
         this.name = name;
         this.craft = craft;
     }

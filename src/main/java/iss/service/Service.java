@@ -1,4 +1,4 @@
-package iss;
+package iss.service;
 
 import java.time.LocalTime;
 import java.util.Random;

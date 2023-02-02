@@ -1,4 +1,4 @@
-package iss.scenes;
+package iss.view;
 
 import iss.Launcher;
 import javafx.fxml.FXMLLoader;
