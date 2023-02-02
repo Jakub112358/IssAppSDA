@@ -10,16 +10,16 @@ module com.example.issappsda {
     requires com.fasterxml.jackson.databind;
 
     exports iss;
-    opens iss.model to org.hibernate.orm.core;
 
-    opens com.example.jsonDeserialization to javafx.fxml, com.fasterxml.jackson.databind;
-    opens iss to javafx.fxml;
+    opens iss to javafx.fxml, com.fasterxml.jackson.databind;
     exports iss.model;
-    //opens iss.model to javafx.fxml;
+
     exports iss.controller;
     opens iss.controller to javafx.fxml;
     exports iss.service;
     opens iss.service to javafx.fxml;
     exports iss.DAO;
     opens iss.DAO to javafx.fxml;
+    opens iss.utils to com.fasterxml.jackson.databind, javafx.fxml;
+    opens iss.model to com.fasterxml.jackson.databind, javafx.fxml, org.hibernate.orm.core;
 }

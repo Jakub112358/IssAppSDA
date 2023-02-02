@@ -1,5 +1,7 @@
-package com.example.jsonDeserialization;
+package iss.utils;
 
+import iss.model.Astronaut;
+import iss.model.ISSLocation;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,12 +19,17 @@ public class JsonOperations {
         return mapper.readTree(url);
     }
 
-    public ISSLocation getLocation() throws IOException {
-        JsonNode request = jsonDeserialization1(new URL(BASE_URL));
-        System.out.println(request.toString());
-        return new ISSLocation(request.get("timestamp").asInt(),
-                request.get("iss_position").get("latitude").asDouble(),
-                request.get("iss_position").get("longitude").asDouble());
+    public ISSLocation getLocation() {
+        JsonNode request;
+        try {
+            request = jsonDeserialization1(new URL(BASE_URL));
+            System.out.println(request.toString());
+            return new ISSLocation(request.get("timestamp").asInt(),
+                    request.get("iss_position").get("latitude").asDouble(),
+                    request.get("iss_position").get("longitude").asDouble());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Astronaut[] getAstronauts() throws IOException {
