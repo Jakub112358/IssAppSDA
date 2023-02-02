@@ -3,6 +3,7 @@ package iss.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "craft_info")
 public class ISSLocation {
 
     @Id
