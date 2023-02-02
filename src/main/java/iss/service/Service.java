@@ -1,13 +1,27 @@
-package iss;
+package iss.service;
 
-import java.time.LocalTime;
+import iss.model.ISSLocation;
+import iss.utils.JsonOperations;
 import java.util.Random;
 
 public class Service {
-    //TODO: replace all this methods with those that provide data from API
-    public String getTime() {
-        return LocalTime.now().withNano(0).toString();
+    private JsonOperations jsonOperations;
+    private ISSLocation currentLocation;
+
+    public Service() {
+        jsonOperations = new JsonOperations();
+        currentLocation = jsonOperations.getLocation();
     }
+
+    public ISSLocation getLocation(){
+        currentLocation = jsonOperations.getLocation();
+        // here DB operation
+        return currentLocation;
+    }
+
+
+
+    //TODO: replace all this methods with those that provide data from API
 
     public String getSpeed() {
         Random random = new Random();
@@ -19,15 +33,7 @@ public class Service {
         return String.valueOf(random.nextInt(10, 12));
     }
 
-    public String getLatitude() {
-        Random random = new Random();
-        return String.valueOf(random.nextInt(-90, 90));
-    }
 
-    public String getAltitude() {
-        Random random = new Random();
-        return String.valueOf(random.nextInt(-90, 90));
-    }
 
     public boolean validateInputLat(String inputLat) {
         int input;

@@ -1,6 +1,7 @@
-package iss;
+package iss.controller;
 
-import javafx.event.ActionEvent;
+import iss.model.ISSLocation;
+import iss.service.Service;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -43,11 +44,13 @@ public class Controller {
 
     @FXML
     void onRefreshButton() {
-        timeLabel.setText(service.getTime());
+        ISSLocation issLocation = service.getLocation();
+
+        timeLabel.setText(String.valueOf(issLocation.getTimestamp()));
         speedLabel.setText(service.getSpeed());
         peopleLabel.setText(service.getPeople());
-        latLabel.setText(service.getLatitude());
-        altLabel.setText(service.getAltitude());
+        latLabel.setText(String.valueOf(issLocation.getLatitude()));
+        altLabel.setText(String.valueOf(issLocation.getLongitude()));
     }
 
     @FXML

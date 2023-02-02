@@ -6,26 +6,20 @@ module com.example.issappsda {
     requires java.naming;
     requires java.persistence;
     requires java.sql;
-
-
-    exports com.example.issappsda;
-    opens com.example.issappsda to javafx.fxml;
-    exports hibernate;
-    opens hibernate to javafx.fxml;
-
     requires okhttp3;
     requires com.fasterxml.jackson.databind;
-    requires retrofit;
 
-    opens com.example.jsonDeserialization to javafx.fxml, com.fasterxml.jackson.databind;
-    exports com.example.issappsda;
-
-    requires org.hibernate.orm.core;
-    requires java.sql;
-
-
-    opens iss to javafx.fxml;
     exports iss;
 
+    opens iss to javafx.fxml, com.fasterxml.jackson.databind;
+    exports iss.model;
 
+    exports iss.controller;
+    opens iss.controller to javafx.fxml;
+    exports iss.service;
+    opens iss.service to javafx.fxml;
+    exports iss.DAO;
+    opens iss.DAO to javafx.fxml;
+    opens iss.utils to com.fasterxml.jackson.databind, javafx.fxml;
+    opens iss.model to com.fasterxml.jackson.databind, javafx.fxml, org.hibernate.orm.core;
 }

@@ -1,6 +1,6 @@
 package iss;
 
-import iss.scenes.SceneManager;
+import iss.view.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.jsonDeserialization;
+package iss.model;
 
 public class ISSLocation {
     private int timestamp;
