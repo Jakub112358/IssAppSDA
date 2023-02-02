@@ -29,12 +29,13 @@ public class Service {
         ISSLocation location2 = getLocation();
         double distance = distanceOnGeoidInMeters(location1.getLatitude(), location1.getLongitude(),
                 location2.getLatitude(), location2.getLongitude());
-        double timestampsDifference = (location2.getTimestamp() - location1.getTimestamp())/1000.0;
+        double timestampsDifference = (location2.getTimestamp() - location1.getTimestamp());
         double speed_mps = distance/timestampsDifference;
+        System.out.println("timestamp: " + timestampsDifference);
         // value in kph
         double speed_kph = (speed_mps*3600.0) / 1000.0;
-        System.out.println(speed_mps);
-        System.out.println(speed_kph);
+        System.out.println("mps: " + speed_mps);
+        System.out.println("kph: " + speed_kph);
 
 
         final DecimalFormat df = new DecimalFormat("0.00");
@@ -50,7 +51,7 @@ public class Service {
         lon2 = degreesToRadians(lon2);
 
         // radius of earth in metres
-        double r = 6378100;
+        double r = 6378100 + 408000;
 
         // P
         double rho1 = r * Math.cos(lat1);
