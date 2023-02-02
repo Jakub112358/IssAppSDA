@@ -31,11 +31,16 @@ public class JsonOperations {
         }
     }
 
-    public SpaceCrew[] getSpaceCrew() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        JsonNode request = jsonDeserialization1(new URL(PEOPLE_URL));
-        String json = request.get("people").toString();
-        return objectMapper.readValue(json, SpaceCrew[].class);
+    public SpaceCrew[] getSpaceCrew(){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            JsonNode request = null;
+            request = jsonDeserialization1(new URL(PEOPLE_URL));
+            String json = request.get("people").toString();
+            return objectMapper.readValue(json, SpaceCrew[].class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
