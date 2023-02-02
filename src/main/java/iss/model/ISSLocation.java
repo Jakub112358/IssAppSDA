@@ -8,7 +8,7 @@ public class ISSLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iss_id")
-    int issId;
+    private int issId;
     @Column(name = "timestamp")
     private int timestamp;
     @Column(name = "latitude")
@@ -16,7 +16,7 @@ public class ISSLocation {
     @Column(name = "longitude")
     private double longitude;
 
-    public ISSLocation() {
+    ISSLocation() {
     }
 
     public ISSLocation(int timestamp, double latitude, double longitude) {
@@ -35,18 +35,6 @@ public class ISSLocation {
 
     public double getLongitude() {
         return longitude;
-    }
-
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
     }
 
     @Override
