@@ -9,9 +9,13 @@ import java.util.List;
 
 public class ISSLocationDAO {
 
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    public void create(List<ISSLocation> issLocation) {
+    public void ISSLocationDao() {
+        sessionFactory = DBConnector.getInstance().getSessionFactory();
+    }
+
+    public void create(ISSLocation issLocation) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(issLocation);

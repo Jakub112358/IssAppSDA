@@ -12,7 +12,7 @@ public class ISSVelocity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "measurement_id")
-    private double measurementId;
+    private int measurementId;
     @Column(name = "velocity")
     private double velocity;
 
@@ -30,5 +30,14 @@ public class ISSVelocity {
 
     public double getVelocity() {
         return velocity;
+    }
+
+    @Override
+    public String toString() {
+        return "ISSVelocity{" +
+                "measurementId=" + measurementId +
+                ", velocity=" + velocity +
+                ", issLocation=" + issLocation +
+                '}';
     }
 }

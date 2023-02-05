@@ -11,7 +11,7 @@ public class ISSLocation {
     @Column(name = "iss_id")
     private int issId;
     @Column(name = "timestamp")
-    private double timestamp;
+    private int timestamp;
     @Column(name = "latitude")
     private double latitude;
     @Column(name = "longitude")
@@ -24,7 +24,7 @@ public class ISSLocation {
     ISSLocation() {
     }
 
-    public ISSLocation(double timestamp, double latitude, double longitude) {
+    public ISSLocation(int timestamp, double latitude, double longitude) {
         this.timestamp = timestamp;
         this.latitude = latitude;
         this.longitude = longitude;

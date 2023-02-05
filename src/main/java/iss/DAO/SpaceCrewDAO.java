@@ -9,14 +9,9 @@ import java.util.List;
 
 public class SpaceCrewDAO {
 
-    private SessionFactory sessionFactory;
-    DBConnector dbConnector = new DBConnector();
+    private static SessionFactory sessionFactory;
 
-    public SpaceCrewDAO() {
-        dbConnector.getInstance().getSessionFactory();
-    }
-
-    public void create(List<SpaceCrew> spaceCrew) {
+    public void create(SpaceCrew spaceCrew) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(spaceCrew);

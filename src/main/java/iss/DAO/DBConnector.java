@@ -7,14 +7,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class DBConnector {
-    private DBConnector instance;
+    private static DBConnector instance;
     private SessionFactory sessionFactory;
 
-    DBConnector() {
+    private DBConnector() {
         connect();
     }
 
-    DBConnector getInstance(){
+    static DBConnector getInstance(){
         if (instance == null){
             instance = new DBConnector();
         }
