@@ -29,9 +29,7 @@ public class ISSLocationDAO {
         List<ISSLocation> issLocationList = session
                 .createQuery("from ISSLocation", ISSLocation.class)
                 .getResultList();
-        int length = issLocationList.toArray().length;
         transaction.commit();
-        ISSLocation issLocation = issLocationList.get(length - 1);
         session.close();
         return issLocationList;
     }
