@@ -18,7 +18,6 @@ public class SpaceCrew {
     SpaceCrew() {
     }
 
-//removed id from constructor
     public SpaceCrew(String name, String craft) {
         this.name = name;
         this.craft = craft;

@@ -14,11 +14,15 @@ public class DBConnector {
         connect();
     }
 
-    public static DBConnector getInstance(){
+    static DBConnector getInstance(){
         if (instance == null){
             instance = new DBConnector();
         }
         return instance;
+    }
+
+    SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     private void connect(){
@@ -29,8 +33,4 @@ public class DBConnector {
          configuration.configure("hibernate.cfg.xml");
          sessionFactory = configuration.buildSessionFactory();
      }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
 }

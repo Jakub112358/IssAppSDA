@@ -1,9 +1,12 @@
 package iss.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "craft_info")
+@Table(name = "iss_velocity")
 public class ISSVelocity {
 
     @Id
@@ -13,6 +16,11 @@ public class ISSVelocity {
     @Column(name = "velocity")
     private int velocity;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "iss_location_id")
+    private ISSLocation issLocation;
+
     ISSVelocity() {
     }
 
@@ -20,7 +28,16 @@ public class ISSVelocity {
         this.velocity = velocity;
     }
 
-    public double getVelocity() {
+    public int getVelocity() {
         return velocity;
+    }
+
+    @Override
+    public String toString() {
+        return "ISSVelocity{" +
+                "measurementId=" + measurementId +
+                ", velocity=" + velocity +
+                ", issLocation=" + issLocation +
+                '}';
     }
 }

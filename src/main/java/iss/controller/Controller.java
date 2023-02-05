@@ -58,13 +58,17 @@ public class Controller {
     void onRefreshButton() {
         ISSLocation issLocation = service.getLocation();
         SpaceCrew[] spaceCrew = service.getSpaceCrew();
-        Instant instant =  Instant.ofEpochSecond(issLocation.getTimestamp());
+        Instant instant =  Instant.ofEpochSecond((long) issLocation.getTimestamp());
 
         latLabel.setText(String.valueOf(issLocation.getLatitude()));
         altLabel.setText(String.valueOf(issLocation.getLongitude()));
         timeLabel.setText(LocalTime.ofInstant(instant, ZoneOffset.UTC).toString());
 
-        speedLabel.setText(service.getSpeed());
+        try {
+            speedLabel.setText(service.getSpeed());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         peopleLabel.setText(String.valueOf(spaceCrew.length));
 

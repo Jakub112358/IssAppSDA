@@ -3,7 +3,7 @@ package iss.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "craft_info")
+@Table(name = "iss_location")
 public class ISSLocation {
 
     @Id
@@ -16,6 +16,10 @@ public class ISSLocation {
     private double latitude;
     @Column(name = "longitude")
     private double longitude;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "issLocation")
+    @JoinColumn(name = "velocity_id")
+    private ISSVelocity velocity;
 
     ISSLocation() {
     }
