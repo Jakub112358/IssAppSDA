@@ -3,7 +3,7 @@ package iss.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "craft_info")
+@Table(name = "iss_location")
 public class ISSLocation {
 
     @Id
@@ -11,22 +11,26 @@ public class ISSLocation {
     @Column(name = "iss_id")
     private int issId;
     @Column(name = "timestamp")
-    private int timestamp;
+    private double timestamp;
     @Column(name = "latitude")
     private double latitude;
     @Column(name = "longitude")
     private double longitude;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "issLocation")
+    @JoinColumn(name = "velocity_id")
+    private ISSVelocity velocity;
+
     ISSLocation() {
     }
 
-    public ISSLocation(int timestamp, double latitude, double longitude) {
+    public ISSLocation(double timestamp, double latitude, double longitude) {
         this.timestamp = timestamp;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public int getTimestamp() {
+    public double getTimestamp() {
         return timestamp;
     }
 

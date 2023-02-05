@@ -7,37 +7,29 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class ISSLocationDao implements IDAO <ISSLocation> {
-    private static SessionFactory sessionFactory;
+public class ISSLocationDAO {
 
-    public ISSLocationDao() {
-        sessionFactory = DBConnector.getInstance().getSessionFactory();
-    }
+    private SessionFactory sessionFactory;
 
-    public Boolean create(ISSLocation issLocation) {
+    public void create(List<ISSLocation> issLocation) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(issLocation);
         transaction.commit();
         session.close();
-        return true;
     }
 
-    public ISSLocation loadISSLocation() {
+    public List<ISSLocation> loadISSLocation() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        List<ISSLocation> issLocationList = session.createQuery("SELECT * FROM craft_info", ISSLocation.class)
+        List<ISSLocation> issLocationList = session
+                .createQuery("SELECT * FROM iss_location", ISSLocation.class)
                 .getResultList();
         int length = issLocationList.toArray().length;
         transaction.commit();
         ISSLocation issLocation = issLocationList.get(length - 1);
         session.close();
-        return issLocation;
-    }
-
-//    to delete in release version
-    public ISSLocation createFakeISSLocation(){
-        return new ISSLocation(5, 70.4554, 120.8342);
+        return issLocationList;
     }
 }
 

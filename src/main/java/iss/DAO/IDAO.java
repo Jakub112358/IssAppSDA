@@ -1,5 +1,5 @@
 package iss.DAO;
 
 public interface IDAO<T>{
-    Boolean create (T object);
+    void create (T object);
 }
