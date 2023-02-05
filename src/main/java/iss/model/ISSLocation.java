@@ -30,7 +30,7 @@ public class ISSLocation {
         this.longitude = longitude;
     }
 
-    public double getTimestamp() {
+    public int getTimestamp() {
         return timestamp;
     }
 
