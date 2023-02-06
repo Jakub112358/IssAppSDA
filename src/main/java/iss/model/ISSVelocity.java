@@ -34,10 +34,6 @@ public class ISSVelocity {
 
     @Override
     public String toString() {
-        return "ISSVelocity{" +
-                "measurementId=" + measurementId +
-                ", velocity=" + velocity +
-                ", issLocation=" + issLocation +
-                '}';
+        return String.valueOf(velocity);
     }
 }

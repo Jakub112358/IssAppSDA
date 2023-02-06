@@ -42,6 +42,18 @@ public class ISSLocation {
         return longitude;
     }
 
+    public void setVelocity(ISSVelocity velocity) {
+        this.velocity = velocity;
+    }
+
+    public ISSVelocity getVelocity() {
+        return velocity;
+    }
+
+    public int getIssId() {
+        return issId;
+    }
+
     @Override
     public String toString() {
         return "ISSLocation{" +
