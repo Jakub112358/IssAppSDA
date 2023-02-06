@@ -8,17 +8,20 @@ import iss.utils.JsonOperations;
 import iss.utils.SpeedCalculator;
 
 public class Service {
+
     private JsonOperations jsonOperations;
     private ISSLocation currentLocation;
     private ISSVelocity issVelocity;
     private SpaceCrew[] spaceCrew;
     private ISSLocationDAO issLocationDAO;
+
     private SpeedCalculator speedCalculator;
 
     public Service() {
         jsonOperations = new JsonOperations();
         issLocationDAO = new ISSLocationDAO();
         speedCalculator = new SpeedCalculator();
+
     }
 
     public ISSLocation getLocation() {
@@ -28,6 +31,7 @@ public class Service {
         issLocationDAO.create(currentLocation);
         return currentLocation;
     }
+
 
     public SpaceCrew[] getSpaceCrew() {
         spaceCrew = jsonOperations.getSpaceCrew();
