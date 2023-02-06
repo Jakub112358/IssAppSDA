@@ -60,6 +60,18 @@ public class Controller {
 
     @FXML
     void onStartButton() {
+        if (timeLine == null) {
+            setTimeLine();
+        }
+        timeLine.play();
+    }
+
+    @FXML
+    void onStopButton() {
+        timeLine.stop();
+    }
+
+    private void setTimeLine() {
         timeLine = new Timeline(
                 new KeyFrame(
                         Duration.ZERO,
@@ -67,13 +79,12 @@ public class Controller {
                 new KeyFrame(Duration.seconds(1))
         );
         timeLine.setCycleCount(Timeline.INDEFINITE);
-        timeLine.play();
     }
 
-    void refreshData(){
+    private void refreshData() {
         ISSLocation issLocation = service.getLocation();
         SpaceCrew[] spaceCrew = service.getSpaceCrew();
-        Instant instant =  Instant.ofEpochSecond(issLocation.getTimestamp());
+        Instant instant = Instant.ofEpochSecond(issLocation.getTimestamp());
 
         latLabel.setText(String.valueOf(issLocation.getLatitude()));
         altLabel.setText(String.valueOf(issLocation.getLongitude()));
@@ -102,7 +113,7 @@ public class Controller {
     void onCalculateIssPass() {
         String latInputString = latInput.getCharacters().toString();
         String altInputString = altInput.getCharacters().toString();
-        if(service.validateInputLat(latInputString) && service.validateInputAlt(altInputString)){
+        if (service.validateInputLat(latInputString) && service.validateInputAlt(altInputString)) {
             nextPassLabel.setText("someday...");
         } else {
             nextPassLabel.setText("incorrect input");
