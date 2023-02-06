@@ -1,6 +1,7 @@
 package iss.service;
 
 import iss.DAO.ISSLocationDAO;
+import iss.DAO.SpaceCrewDAO;
 import iss.model.ISSLocation;
 import iss.model.ISSVelocity;
 import iss.model.SpaceCrew;
@@ -9,19 +10,23 @@ import iss.utils.SpeedCalculator;
 
 public class Service {
 
-    private JsonOperations jsonOperations;
+    private final JsonOperations jsonOperations;
+    private final ISSLocationDAO issLocationDAO;
+    private final SpaceCrewDAO spaceCrewDAO;
+    private final SpeedCalculator speedCalculator;
     private ISSLocation currentLocation;
     private ISSVelocity issVelocity;
     private SpaceCrew[] spaceCrew;
-    private ISSLocationDAO issLocationDAO;
 
-    private SpeedCalculator speedCalculator;
 
     public Service() {
         jsonOperations = new JsonOperations();
         issLocationDAO = new ISSLocationDAO();
+        spaceCrewDAO = new SpaceCrewDAO();
         speedCalculator = new SpeedCalculator();
 
+        currentLocation = jsonOperations.getLocation();
+        issLocationDAO.create(currentLocation);
     }
 
     public ISSLocation getLocation() {
@@ -35,7 +40,7 @@ public class Service {
 
     public SpaceCrew[] getSpaceCrew() {
         spaceCrew = jsonOperations.getSpaceCrew();
-        // here DB operation
+        spaceCrewDAO.create(spaceCrew);
         return spaceCrew;
     }
 
