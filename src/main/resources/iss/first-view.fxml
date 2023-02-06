@@ -197,7 +197,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onRefreshButton" text="refresh" />
+                  <Button mnemonicParsing="false" onAction="#onStartButton" text="start" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
