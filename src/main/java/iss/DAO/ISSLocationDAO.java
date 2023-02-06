@@ -45,11 +45,7 @@ public class ISSLocationDAO {
                 .getResultList();
         transaction.commit();
         session.close();
-        try {
-            return issLocationList.get(n - 1);
-        } catch (IndexOutOfBoundsException e) {
-            return loadNthFromEndISSLocation(n - 1);
-        }
+        return issLocationList.get(issLocationList.size()-1);
     }
 }
 

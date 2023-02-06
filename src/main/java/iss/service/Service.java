@@ -37,13 +37,11 @@ public class Service {
         return currentLocation;
     }
 
-
     public SpaceCrew[] getSpaceCrew() {
         spaceCrew = jsonOperations.getSpaceCrew();
         spaceCrewDAO.create(spaceCrew);
         return spaceCrew;
     }
-
 
     public boolean validateInputLat(String inputLat) {
         int input;

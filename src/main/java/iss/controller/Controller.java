@@ -21,8 +21,9 @@ import java.util.Arrays;
 
 
 public class Controller {
-    Service service = new Service();
+    private final Service service = new Service();
     private Timeline timeLine;
+    private Timeline timeLineCrew;
 
 
     @FXML
@@ -60,15 +61,18 @@ public class Controller {
 
     @FXML
     void onStartButton() {
-        if (timeLine == null) {
+        if (timeLine == null || timeLineCrew == null) {
             setTimeLine();
+            setTimeLineCrew();
         }
         timeLine.play();
+        timeLineCrew.play();
     }
 
     @FXML
     void onStopButton() {
         timeLine.stop();
+        timeLineCrew.stop();
     }
 
     private void setTimeLine() {
@@ -80,20 +84,31 @@ public class Controller {
         );
         timeLine.setCycleCount(Timeline.INDEFINITE);
     }
+    private void setTimeLineCrew() {
+        timeLineCrew = new Timeline(
+                new KeyFrame(
+                        Duration.ZERO,
+                        actionEvent -> refreshCrew()),
+                new KeyFrame(Duration.seconds(10))
+        );
+        timeLineCrew.setCycleCount(Timeline.INDEFINITE);
+    }
 
     private void refreshData() {
         ISSLocation issLocation = service.getLocation();
-        SpaceCrew[] spaceCrew = service.getSpaceCrew();
         Instant instant = Instant.ofEpochSecond(issLocation.getTimestamp());
 
         latLabel.setText(String.valueOf(issLocation.getLatitude()));
         altLabel.setText(String.valueOf(issLocation.getLongitude()));
         timeLabel.setText(LocalTime.ofInstant(instant, ZoneOffset.UTC).toString());
-        speedLabel.setText(String.valueOf(service.getLocation().getVelocity().toString()));
-        peopleLabel.setText(String.valueOf(spaceCrew.length));
+        speedLabel.setText(String.valueOf(issLocation.getVelocity().toString()));
+    }
 
+    private void refreshCrew(){
+        SpaceCrew[] spaceCrew = service.getSpaceCrew();
         ObservableList<SpaceCrew> spaceCrewList = FXCollections.observableList(Arrays.asList(spaceCrew));
         boxAstronauts.setItems(spaceCrewList);
+        peopleLabel.setText(String.valueOf(spaceCrew.length));
     }
 
     @FXML
