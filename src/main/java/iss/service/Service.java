@@ -31,7 +31,7 @@ public class Service {
 
     public ISSLocation getLocation() {
         currentLocation = jsonOperations.getLocation();
-        issVelocity = speedCalculator.calculateSpeed(issLocationDAO.loadNthFromEndISSLocation(5),currentLocation);
+        issVelocity = speedCalculator.calculateSpeed(issLocationDAO.loadNthFromEndISSLocation(10),currentLocation);
         currentLocation.setVelocity(issVelocity);
         issLocationDAO.create(currentLocation);
         return currentLocation;
