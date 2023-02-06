@@ -23,11 +23,9 @@ public class SpaceCrewDAO {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<SpaceCrew> spaceCrewList = session
-                .createQuery("SELECT * FROM members", SpaceCrew.class)
+                .createQuery("from SpaceCrew", SpaceCrew.class)
                 .getResultList();
-        int length = spaceCrewList.toArray().length;
         transaction.commit();
-        SpaceCrew spaceCrew = spaceCrewList.get(length - 1);
         session.close();
         return spaceCrewList;
     }

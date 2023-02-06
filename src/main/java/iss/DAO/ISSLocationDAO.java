@@ -11,7 +11,7 @@ public class ISSLocationDAO {
 
     private static SessionFactory sessionFactory;
 
-    public void ISSLocationDao() {
+    public ISSLocationDAO() {
         sessionFactory = DBConnector.getInstance().getSessionFactory();
     }
 
@@ -27,11 +27,9 @@ public class ISSLocationDAO {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<ISSLocation> issLocationList = session
-                .createQuery("SELECT * FROM iss_location", ISSLocation.class)
+                .createQuery("from ISSLocation", ISSLocation.class)
                 .getResultList();
-        int length = issLocationList.toArray().length;
         transaction.commit();
-        ISSLocation issLocation = issLocationList.get(length - 1);
         session.close();
         return issLocationList;
     }

@@ -14,7 +14,7 @@ public class ISSVelocity {
     @Column(name = "measurement_id")
     private int measurementId;
     @Column(name = "velocity")
-    private double velocity;
+    private int velocity;
 
     @OneToOne(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
@@ -28,7 +28,7 @@ public class ISSVelocity {
         this.velocity = velocity;
     }
 
-    public double getVelocity() {
+    public int getVelocity() {
         return velocity;
     }
 
