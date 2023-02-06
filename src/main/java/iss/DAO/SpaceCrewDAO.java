@@ -11,10 +11,24 @@ public class SpaceCrewDAO {
 
     private static SessionFactory sessionFactory;
 
+    public SpaceCrewDAO() {
+        sessionFactory = DBConnector.getInstance().getSessionFactory();
+    }
+
     public void create(SpaceCrew spaceCrew) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(spaceCrew);
+        transaction.commit();
+        session.close();
+    }
+
+    public void create(SpaceCrew[] spaceCrew) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        for (SpaceCrew crew : spaceCrew) {
+            session.save(crew);
+        }
         transaction.commit();
         session.close();
     }
