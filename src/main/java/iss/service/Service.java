@@ -21,7 +21,7 @@ public class Service {
         issLocationDAO = new ISSLocationDAO();
     }
 
-    public ISSLocation getLocation(){
+    public ISSLocation getLocation() {
         currentLocation = jsonOperations.getLocation();
         issLocationDAO.create(currentLocation);
         return currentLocation;
