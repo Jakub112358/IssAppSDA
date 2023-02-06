@@ -1,5 +1,6 @@
 package iss.service;
 
+import iss.DAO.ISSLocationDAO;
 import iss.model.ISSLocation;
 import iss.model.SpaceCrew;
 import iss.utils.JsonOperations;
@@ -8,20 +9,24 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Service {
+
     private JsonOperations jsonOperations;
     private ISSLocation currentLocation;
     private SpaceCrew[] spaceCrew;
+    private ISSLocationDAO issLocationDAO;
 
     public Service() {
         jsonOperations = new JsonOperations();
         currentLocation = jsonOperations.getLocation();
+        issLocationDAO = new ISSLocationDAO();
     }
 
-    public ISSLocation getLocation(){
+    public ISSLocation getLocation() {
         currentLocation = jsonOperations.getLocation();
-        // here DB operation
+        issLocationDAO.create(currentLocation);
         return currentLocation;
     }
+
     public String getSpeed() throws InterruptedException {
 
         ISSLocation location1 = getLocation();
@@ -30,10 +35,10 @@ public class Service {
         double distance = distanceOnGeoidInMeters(location1.getLatitude(), location1.getLongitude(),
                 location2.getLatitude(), location2.getLongitude());
         double timestampsDifference = (location2.getTimestamp() - location1.getTimestamp());
-        double speed_mps = distance/timestampsDifference;
+        double speed_mps = distance / timestampsDifference;
         System.out.println("timestamp: " + timestampsDifference);
         // value in kph
-        double speed_kph = (speed_mps*3600.0) / 1000.0;
+        double speed_kph = (speed_mps * 3600.0) / 1000.0;
         System.out.println("mps: " + speed_mps);
         System.out.println("kph: " + speed_kph);
 
@@ -43,7 +48,7 @@ public class Service {
         return df.format(speed_kph);
     }
 
-    public double distanceOnGeoidInMeters (double lat1, double lon1, double lat2, double lon2) {
+    public double distanceOnGeoidInMeters(double lat1, double lon1, double lat2, double lon2) {
         // Convert degrees to radians
         lat1 = degreesToRadians(lat1);
         lon1 = degreesToRadians(lon1);
@@ -74,11 +79,9 @@ public class Service {
         return r * theta;
     }
 
-    public double degreesToRadians (double degrees) {
-        return degrees * Math.PI/180;
+    public double degreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
     }
-
-
 
 
     //TODO: replace all this methods with those that provide data from API
@@ -89,7 +92,6 @@ public class Service {
         // here DB operation
         return spaceCrew;
     }
-
 
 
     public boolean validateInputLat(String inputLat) {
